@@ -15,7 +15,7 @@ app.use(morgan('dev'));
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
-//app.use('/', router);
+app.use('/', router);
 
 app.listen(port, () => console.log(`app listening at http://localhost:${port}`));
 
