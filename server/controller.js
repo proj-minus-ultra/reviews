@@ -21,6 +21,15 @@ const controller = {
         res.status(201).send('Added Successfully');
       }
     })
+  },
+  getRatings: (req, res) =>{
+    database.getRatings(req, (err,result) =>{
+      if(err){
+        res.status(404).send(err);
+      } else {
+        res.status(202).send(result);
+      }
+    })
   }
 
 }
