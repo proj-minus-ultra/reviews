@@ -1,9 +1,9 @@
-const MongoClient = require('mongodb').MongoClient;
+const Mongo = require('mongodb').MongoClient;
 const url = `mongodb://localhost`;
 
 module.exports = {
   getAllReviews(cb){
-    MongoClient .connect(url, (err,client) =>{
+    Mongo.connect(url, { useUnifiedTopology: true }, (err,client) =>{
       if(err){
         console.log(err);
         cb(err);
@@ -17,6 +17,24 @@ module.exports = {
             cb(err);
           } else {
             cb(null,results);
+          }
+        })
+      }
+    })
+  },
+  postReview(req, cb) {
+    Mongo.connect(url, (err, client) =>{
+      if (err) {
+        cb(err);
+      } else {
+        let db = client.db('reviews');
+        let collection = db.collection('sdc');
+        collection.insertOne(req.body, (err, results) =>{
+          if(err) {
+            console.log('Error Posting');
+            cb(err);
+          } else {
+            cb(null, results);
           }
         })
       }
