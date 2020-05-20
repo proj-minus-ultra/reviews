@@ -1,17 +1,13 @@
-var mongoose = require('mongoose');
-var schema = require('./schema')
-mongoose.connect('mongodb://localhost/JJACDReviews', {useNewUrlParser: true});
+const Mongo = require('mongodb').MongoClient;
+const url = "mongodb://localhost:27017/";
 
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-  console.log("Connected to database")
+Mongo.connect(url, function(err, db) {
+  if (err) throw err;
+  var dbo = db.db("reviews");
+  var myobj = { name: "Company Inc", address: "Highway 37" };
+  dbo.collection("sdc").insertOne(myobj, function(err, res) {
+    if (err) throw err;
+    console.log("1 document inserted");
+    db.close();
+  });
 });
-
-
-
-var Reviews = mongoose.model('Reviews', schema);
-
-
-
-module.exports = Reviews
