@@ -30,6 +30,15 @@ const controller = {
         res.status(202).send(result);
       }
     })
+  },
+  delete: (req,res) =>{
+    database.deleteReview(req, (err, result) =>{
+      if(err) {
+        res.status(404).send(err);
+      } else {
+        res.status(203).send('Deleted Successfully');
+      }
+    })
   }
 
 }
