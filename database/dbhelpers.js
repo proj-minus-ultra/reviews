@@ -62,5 +62,19 @@ module.exports = {
 
       }
     })
+  },
+  deleteReview(req, cb){
+    Mongo.connect(url, { useUnifiedTopology: true }, (err,client) =>{
+      if(err){
+        cb(err);
+      } else {
+        let toDelete = req.params;
+        collection.deleteOne(toDelete, (err,results) =>{
+          if(err) throw err;
+          cb(null, results);
+        })
+      }
+    })
+
   }
 }
