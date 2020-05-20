@@ -1,6 +1,7 @@
 const Mongo = require('mongodb').MongoClient;
 const url = `mongodb://localhost`;
 
+
 module.exports = {
   getAllReviews(cb){
     Mongo.connect(url, { useUnifiedTopology: true }, (err,client) =>{
@@ -8,11 +9,10 @@ module.exports = {
         console.log(err);
         cb(err);
       } else {
-        console.log('Connected To DB');
-        let db = client.db('reviews')
-        let allReviews = db.collection('sdc');
+       const db = client.db('reviews')
+       const collection = db.collection('sdc');
 
-        allReviews.find().toArray((err,results) =>{
+       collection.find().toArray((err,results) =>{
           if(err) {
             cb(err);
           } else {
@@ -23,12 +23,13 @@ module.exports = {
     })
   },
   postReview(req, cb) {
-    Mongo.connect(url, (err, client) =>{
+    Mongo.connect(url, { useUnifiedTopology: true }, (err, client) =>{
       if (err) {
         cb(err);
       } else {
-        let db = client.db('reviews');
-        let collection = db.collection('sdc');
+        const db = client.db('reviews')
+        const collection = db.collection('sdc');
+
         collection.insertOne(req.body, (err, results) =>{
           if(err) {
             console.log('Error Posting');
@@ -37,6 +38,28 @@ module.exports = {
             cb(null, results);
           }
         })
+      }
+    })
+  },
+  getRatings(req, cb) {
+    Mongo.connect(url, { useUnifiedTopology: true }, (err,client) =>{
+      if(err) {
+        cb(err);
+      } else {
+        const db = client.db('reviews')
+        const collection = db.collection('sdc');
+
+        let toFind = req.params
+        console.log('To Find:', toFind);
+        collection.find(toFind).toArray((err, results) =>{
+          if(err) {
+            cb(err);
+          } else {
+            console.log(results)
+            cb(null,results);
+          }
+        })
+
       }
     })
   }
