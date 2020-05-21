@@ -22,6 +22,28 @@ module.exports = {
       }
     })
   },
+  getImage(req, cb){
+    Mongo.connect(url, { useUnifiedTopology: true }, (err,client)=>{
+      if(err) {
+        cb(err);
+      } else {
+        const db = client.db('reviews')
+        const collection = db.collection('sdc');
+
+        let toFind = req.params
+        console.log('TO Find:',toFind);
+        //let image = {image: }
+        collection.find(toFind).toArray((err, results) =>{
+          if(err) {
+            cb(err);
+          } else {
+            console.log(results)
+            cb(null,results);
+          }
+        })
+      }
+    })
+  },
   postReview(req, cb) {
     Mongo.connect(url, { useUnifiedTopology: true }, (err, client) =>{
       if (err) {
