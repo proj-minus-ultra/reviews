@@ -11,4 +11,7 @@ router.route('/reviews/rating/:id')
 router.route('/reviewspost')
   .post(controller.post);
 
+router.route('/reviews/:id')
+  .get
+
 module.exports = router
