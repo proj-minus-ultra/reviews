@@ -9,9 +9,9 @@ router.route('/reviews/rating/:id')
   .get(controller.getRatings)
 
 router.route('/reviewspost')
-  .post(controller.post);
+  .post(controller.post)
 
 router.route('/reviews/:id')
-  .get
+  .get(controller.getOne)
 
 module.exports = router
