@@ -8,7 +8,7 @@ let drop = () =>{
     }
 
     const db = client.db('sdc')
-    const collection = db.collection('reviews');
+
     db.dropDatabase((err,results)=>{
       if(err) throw err;
       console.log(`Database has been dropped`);
