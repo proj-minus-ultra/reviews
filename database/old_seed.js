@@ -1,3 +1,4 @@
+//run using node --max-old-space-size=16000 database/old_seed.js
 const Mongo = require('mongodb').MongoClient;
 const url = `mongodb://localhost:27017/reviews`;
 const faker = require('faker');
