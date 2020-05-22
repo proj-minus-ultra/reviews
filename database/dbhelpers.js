@@ -9,8 +9,8 @@ module.exports = {
         console.log(err);
         cb(err);
       } else {
-       const db = client.db('reviews')
-       const collection = db.collection('sdc');
+       const db = client.db('sdc')
+       const collection = db.collection('reviews');
 
        collection.find().toArray((err,results) =>{
           if(err) {
@@ -27,8 +27,8 @@ module.exports = {
       if(err) {
         cb(err);
       } else {
-        const db = client.db('reviews')
-        const collection = db.collection('sdc');
+        const db = client.db('sdc')
+        const collection = db.collection('reviews');
 
         let toFind = req.params
         console.log('TO Find:',toFind);
@@ -49,8 +49,8 @@ module.exports = {
       if (err) {
         cb(err);
       } else {
-        const db = client.db('reviews')
-        const collection = db.collection('sdc');
+        const db = client.db('sdc')
+        const collection = db.collection('reviews');
 
         collection.insertOne(req.body, (err, results) =>{
           if(err) {
@@ -68,8 +68,8 @@ module.exports = {
       if(err) {
         cb(err);
       } else {
-        const db = client.db('reviews')
-        const collection = db.collection('sdc');
+        const db = client.db('sdc')
+        const collection = db.collection('reviews');
 
         let toFind = req.params
         console.log('To Find:', toFind);

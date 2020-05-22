@@ -4,9 +4,6 @@ const faker = require('faker');
 const fs = require('fs');
 const csvWriter = require('csv-write-stream');
 const writer = csvWriter();
-const csvtojson = require("csvtojson");
-
-let amount = 1000000;
 
 let reviewTitle = [
   'Wicked',
@@ -66,91 +63,87 @@ let bodyTypes = [
       'Spain',
       'Berlin'
     ];
-
-let wearTo = ['practiceYoga', 'dance', 'cycle', 'run', 'wearCasually'];
-let rating = [5, 4, 3, 2, 1];
-
-let createReviews = (index)=>{
-  let mockProduct = {}
-  let constraint = Math.floor(Math.random() * 6);
+  let wearTo = ['practiceYoga', 'dance', 'cycle', 'run', 'wearCasually'];
+  let rating = [5, 4, 3, 2, 1];
 
 
-  mockProduct.reviews = []
-
-  for(let i = 0; i < 5; i++){
-
-    let review = {};
-    review.id = index;
-    review.rating =  rating[Math.floor(Math.random() * rating.length)];
-    review.title = reviewTitle[Math.floor(Math.random() * reviewTitle.length)];
-    review.review = faker.lorem.paragraph();
-    review.recommendation = recommendation[Math.floor(Math.random() * recommendation.length)];
-    review.nickname = faker.internet.userName();
-    review.email = faker.internet.email();
-    review.age = age[Math.floor(Math.random() * age.length)];
-    review.bodyType = bodyTypes[Math.floor(Math.random() * bodyTypes.length)];
-    review.location = location[Math.floor(Math.random() * location.length)];
-    review.wearTo = wearTo[Math.floor(Math.random() * wearTo.length)];
-    review.likes = faker.lorem.words();
-    review.dislikes = faker.lorem.words();
-
-    mockProduct.reviews.push(review);
-  }
+  let createReviews = (index)=>{
+    let mockProduct = {}
+    let constraint = Math.floor(Math.random() * 6);
 
 
-  return mockProduct;
-};
+    mockProduct.reviews = []
+
+    for(let i = 0; i < constraint; i++){
+
+      let review = {};
+      review.id = index;
+      review.rating =  rating[Math.floor(Math.random() * rating.length)];
+      review.title = reviewTitle[Math.floor(Math.random() * reviewTitle.length)];
+      review.review = faker.lorem.paragraph();
+      review.recommendation = recommendation[Math.floor(Math.random() * recommendation.length)];
+      review.nickname = faker.internet.userName();
+      review.email = faker.internet.email();
+      review.age = age[Math.floor(Math.random() * age.length)];
+      review.bodyType = bodyTypes[Math.floor(Math.random() * bodyTypes.length)];
+      review.location = location[Math.floor(Math.random() * location.length)];
+      review.wearTo = wearTo[Math.floor(Math.random() * wearTo.length)];
+      review.likes = faker.lorem.words();
+      review.dislikes = faker.lorem.words();
+
+      mockProduct.reviews.push(review);
+    }
+
+      //only way i could give a bunch of reviews the same id
+      return mockProduct;
+  };
 
 
-let csvGenerator = (cb) =>{
-  console.log('To Seed:', amount);
+
+
+//negative one so first set of reviews has id 0
+let id = -1;
+
+let csv = (writer, cb) =>{
   writer.pipe(fs.createWriteStream('sdc.csv'));
-  console.log('Generating CSV!');
-  for(let i = 0; i < amount; i++){
-    let temp = createReviews(i);
-
-    temp.reviews.map((item) =>{
-      writer.write(item);
-    })
-
-  }
-
-  console.log('CSV Generated! Seeding...');
-
-  cb()
-};
-
-let amtAddedSoFar = 0;
-let seed = () =>{
-
-  csvtojson().fromFile("sdc.csv")
-    .then((csvData) =>{
-      Mongo.connect(url,{ useUnifiedTopology: true }, (err,client) =>{
-        if(err){throw err;}
-        let db = client.db('sdc');
-        let collection = db.collection('reviews');
-        console.log('Seeding Database...')
-
-        collection.insertMany(csvData, (err, results) =>{
-          if (err) {throw err;}
-          amtAddedSoFar += results.insertedCount;
-          console.log(`Total Seeded So Far:${amtAddedSoFar}`);
-          if(amtAddedSoFar < amount){
-            console.log('Not Enough Seeded, Seeding Again...');
-            seed();
-          } else {
-            writer.end();
-
-            console.log('Seeding Complete!');
-            console.log('Amount Seeded:', amtAddedSoFar);
-            console.log('Amount Target:',amount)
-            client.close();
-          }
-        })
+  console.log('Generating CSV...');
+  let i = 4500000;
+   let write=()=> {
+    let ok = true;
+    do {
+      i -= 1;
+      id += 1;
+      console.log(id);
+      let review = createReviews(id);
+      review.reviews.map((rev)=>{
+        if (i === 0) {
+          writer.write(rev,cb);
+        } else {
+          // see if we should continue, or wait
+          ok = writer.write(rev);
+        }
       })
-    })
-};
+    } while (i > 0 && ok);
+      if (i > 0) {
+        // write some more once it drains
+        writer.once('drain', write);
+      }
+    }
+      write();
+  };
 
 
-csvGenerator(seed);
+  csv(writer, ()=>{
+    writer.end();
+    console.log(`Successfully Generated CSV ! Time to Insert into Database`);
+    console.log('Inserting into Database...');
+  });
+
+
+
+
+
+
+
+
 

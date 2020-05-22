@@ -8,7 +8,9 @@
     "start": "nodemon",
     "build": "webpack --w --mode development",
     "watch": "webpack-dev-server --open",
-    "seed": "node --max-old-space-size=16000 database/seed.js"
+    "seed": "node database/seed.js && mongoimport --type csv -d sdc -c reviews --headerline --drop sdc.csv",
+    "count": "node database/counter.js",
+    "drop": "node database/drop.js && npm run count"
   },
   "repository": {
     "type": "git",

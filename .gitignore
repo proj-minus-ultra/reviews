@@ -3,3 +3,4 @@ old_database
 old_server
 client/dist/main.js
 .vscode
+sdc.csv
