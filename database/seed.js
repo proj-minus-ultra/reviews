@@ -107,7 +107,7 @@ let id = -1;
 let csv = (writer, cb) =>{
   writer.pipe(fs.createWriteStream('sdc.csv'));
   console.log('Generating CSV...');
-  let i = 5000000;
+  let i = 4500000;
   function write() {
     let ok = true;
     do {
@@ -120,13 +120,11 @@ let csv = (writer, cb) =>{
           writer.write(rev,cb);
         } else {
           // see if we should continue, or wait
-          // don't pass the callback, because we're not done yet
           ok = writer.write(rev);
         }
       })
     } while (i > 0 && ok);
       if (i > 0) {
-        // had to stop early!
         // write some more once it drains
         writer.once('drain', write);
       }
@@ -138,4 +136,14 @@ let csv = (writer, cb) =>{
   csv(writer, ()=>{
     writer.end();
     console.log(`Successfully Generated CSV ! Time to Insert into Database`);
-  })
+    console.log('Inserting into Database...');
+  });
+
+
+
+
+
+
+
+
+
