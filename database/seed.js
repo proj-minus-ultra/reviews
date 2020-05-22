@@ -1,123 +1,32 @@
 const Mongo = require('mongodb').MongoClient;
 const url = `mongodb://localhost:27017/reviews`;
-const faker = require('faker')
+const faker = require('faker');
+const fs = require('fs');
+const csvWriter = require('csv-write-stream');
+const writer = csvWriter();
+const csvtojson = require("csvtojson");
 
+let amount = 1000000;
 
-let createProduct = (index) =>{
-  //should generate random number between 0 and 20
-  let product = {};
-  let imageNumbers = [0,
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-    10,
-    11,
-    12,
-    13,
-    14,
-    15,
-    16,
-    17,
-    18,
-    19,
-    20,];
-  let randoImageNumber = imageNumbers[Math.floor(Math.random() * imageNumbers.length)];
-  product.productimage = `https://sdc-reviews.s3-us-west-2.amazonaws.com/sdc/${randoImageNumber}.jpg`
-  product.id = index;
-  product.title = faker.commerce.productName();
-  product.reviews = [];
-  //random amount of reviews for each product
-  let contraint = Math.floor(Math.random() * 25) + 5;
+let reviewTitle = [
+  'Wicked',
+  'Awesome',
+  'Terrible',
+  'Mehh',
+  'Fits',
+  'Thank you!',
+  'Perfect',
+  'Are a must!',
+  'Overpriced',
+  'Super Comfy',
+  'Quality that can be felt',
+  'A little dissapointed',
+  'Amazing!'
+];
 
-  for(let i = 0; i < contraint; i++){
-    let rating = [5, 4, 3, 2, 1];
-    let adjective = ['Stretchy', 'Soft', 'High-Rise', 'ABC', 'Warpstreme', 'tight', 'Comy'];
-    let noun = ['Jogger','Sweats','Hoodie','Bra','Tight','Shirt','T-Shirt','Coat','Jacket'];
-    let reviewTitle = [
-      'Wicked',
-      'Awesome',
-      'Terrible',
-      'Mehh',
-      'Fits',
-      'Thank you!',
-      'Perfect',
-      'Are a must!',
-      'Overpriced',
-      'Super Comfy',
-      'Quality that can be felt',
-      'A little dissapointed',
-      'Amazing!'
-    ];
+let recommendation = [true, false];
 
-    let pronouns = ['I', 'She', 'He', 'It', 'They', 'Them'];
-    let connectingWords = [
-      "didn't",
-      "can't",
-      "wouldn't",
-      "isn't",
-      'especially',
-      'loved',
-      'hated',
-      'enjoyed',
-      'damaged',
-      'begin',
-      'appear',
-      'climb',
-      'danced',
-      'eat',
-      'find',
-      'hesitated',
-      'lay',
-      'might',
-      'neglect',
-      'received'
-    ];
-
-    let moreWords = [
-      'are',
-      'super',
-      'have',
-      'been',
-      'everyday',
-      'color',
-      'different',
-      'office',
-      'gym',
-      'rock climbing',
-      'horrible',
-      'second pair',
-      'doing well',
-      'well done',
-      'will buy more',
-      'other',
-      'picture',
-      'traveling',
-      'awesome',
-      'freedom',
-      'sleeping'
-    ];
-
-    let evenMoreWords = [
-      'saggy',
-      'comfy',
-      'never washed',
-      'had a problem',
-      'gift',
-      'regularly experience',
-      'no room down there',
-      'brother',
-      'great gift'
-    ];
-
-    let recommendation = [true, false];
-
-    let age = [
+let age = [
       'noAge',
       'under18',
       'between1824',
@@ -127,7 +36,7 @@ let createProduct = (index) =>{
       'between5565',
       'over65'
     ];
-    let bodyTypes = [
+let bodyTypes = [
       'athletic',
       'curvy',
       'lean',
@@ -137,7 +46,7 @@ let createProduct = (index) =>{
       'solid'
     ];
 
-    let location = [
+  let location = [
       'Los Angeles',
       'London',
       'Texas',
@@ -158,64 +67,90 @@ let createProduct = (index) =>{
       'Berlin'
     ];
 
-    let wearTo = ['practiceYoga', 'dance', 'cycle', 'run', 'wearCasually'];
-    let randomLike = () =>{
-      let adj = adjective[Math.floor(Math.random() * adjective.length)];
+let wearTo = ['practiceYoga', 'dance', 'cycle', 'run', 'wearCasually'];
+let rating = [5, 4, 3, 2, 1];
 
-    };
-    product.reviews.push({
-      rating: rating[Math.floor(Math.random() * rating.length)],
-      title: reviewTitle[Math.floor(Math.random() * reviewTitle.length)],
-      review: faker.lorem.paragraph(),
-      recommendation: recommendation[Math.floor(Math.random() * recommendation.length)],
-      nickname: faker.internet.userName(),
-      email: faker.internet.email(),
-      age: age[Math.floor(Math.random() * age.length)],
-      bodyType: bodyTypes[Math.floor(Math.random() * bodyTypes.length)],
-      location: location[Math.floor(Math.random() * location.length)],
-      wearTo: wearTo[Math.floor(Math.random() * wearTo.length)],
-      likes : faker.lorem.words(),
-      dislikes: faker.lorem.words(),
+let createReviews = (index)=>{
+  let mockProduct = {}
+  let constraint = Math.floor(Math.random() * 6);
+
+
+  mockProduct.reviews = []
+
+  for(let i = 0; i < 5; i++){
+
+    let review = {};
+    review.id = index;
+    review.rating =  rating[Math.floor(Math.random() * rating.length)];
+    review.title = reviewTitle[Math.floor(Math.random() * reviewTitle.length)];
+    review.review = faker.lorem.paragraph();
+    review.recommendation = recommendation[Math.floor(Math.random() * recommendation.length)];
+    review.nickname = faker.internet.userName();
+    review.email = faker.internet.email();
+    review.age = age[Math.floor(Math.random() * age.length)];
+    review.bodyType = bodyTypes[Math.floor(Math.random() * bodyTypes.length)];
+    review.location = location[Math.floor(Math.random() * location.length)];
+    review.wearTo = wearTo[Math.floor(Math.random() * wearTo.length)];
+    review.likes = faker.lorem.words();
+    review.dislikes = faker.lorem.words();
+
+    mockProduct.reviews.push(review);
+  }
+
+
+  return mockProduct;
+};
+
+
+let csvGenerator = (cb) =>{
+  console.log('To Seed:', amount);
+  writer.pipe(fs.createWriteStream('sdc.csv'));
+  console.log('Generating CSV!');
+  for(let i = 0; i < amount; i++){
+    let temp = createReviews(i);
+
+    temp.reviews.map((item) =>{
+      writer.write(item);
     })
 
   }
-  return product;
+
+  console.log('CSV Generated! Seeding...');
+
+  cb()
 };
 
-let data = () => {
-  let arr = [];
-  for (let i = 0; i < 5000; i++) {
-    console.log(i);
-    arr.push(createProduct(i));
-  }
-  return arr;
-};
-
-let toInsert = data();
-
+let amtAddedSoFar = 0;
 let seed = () =>{
-  Mongo.connect(url, { useUnifiedTopology: true }, (err, client) =>{
 
-    if (err) {
-      console.log(err);
-    } else {
+  csvtojson().fromFile("sdc.csv")
+    .then((csvData) =>{
+      Mongo.connect(url,{ useUnifiedTopology: true }, (err,client) =>{
+        if(err){throw err;}
+        let db = client.db('sdc');
+        let collection = db.collection('reviews');
+        console.log('Seeding Database...')
 
-      let db = client.db('reviews');
-      let collection = db.collection('sdc');
-
-      toInsert.map((item) =>{
-        collection.insertOne(item, (err, results) =>{
-          if(err) {
-            console.log('Error!:', err);
+        collection.insertMany(csvData, (err, results) =>{
+          if (err) {throw err;}
+          amtAddedSoFar += results.insertedCount;
+          console.log(`Total Seeded So Far:${amtAddedSoFar}`);
+          if(amtAddedSoFar < amount){
+            console.log('Not Enough Seeded, Seeding Again...');
+            seed();
           } else {
-            console.log('SEEDED!');
+            writer.end();
+
+            console.log('Seeding Complete!');
+            console.log('Amount Seeded:', amtAddedSoFar);
+            console.log('Amount Target:',amount)
+            client.close();
           }
         })
       })
-
-
-    }
-  });
+    })
 };
 
-seed();
+
+csvGenerator(seed);
+
