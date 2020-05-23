@@ -8,15 +8,18 @@
     "start": "nodemon",
     "build": "webpack --w --mode development",
     "watch": "webpack-dev-server --open",
-    "seed": "node database/seed.js && mongoimport --type csv -d sdc -c reviews --headerline --drop sdc.csv",
+    "csv": "node database/seed.js ",
     "count": "node database/counter.js",
-    "drop": "node database/drop.js && npm run count"
+    "drop": "node database/drop.js && npm run count",
+    "psql": "psql -d sdc -U root",
+    "schema": "psql -d sdc -U root -f schema.sql",
+    "mongo-seed":"mongoimport --type csv -d sdc -c reviews --headerline --drop sdc.csv"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/JJACD/reviews_component.git"
   },
-  "author": "Danny San",
+  "author": "Danny San, Alex Benko",
   "license": "MIT",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.28",
@@ -31,9 +34,9 @@
     "faker": "^4.1.0",
     "moment": "^2.25.3",
     "mongodb": "^3.5.7",
-    "mongoose": "5.9.7",
     "morgan": "1.10.0",
     "nodemon": "2.0.2",
+    "pg": "^8.2.1",
     "react": "16.13.1",
     "react-dom": "16.13.1"
   },
