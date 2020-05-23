@@ -1,6 +1,3 @@
-const Mongo = require('mongodb').MongoClient;
-const url = `mongodb://localhost:27017/reviews`;
-const faker = require('faker');
 const fs = require('fs');
 
 const createReview = require('./createReviews.js').createReviews;
