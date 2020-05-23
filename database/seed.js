@@ -3,6 +3,7 @@ const url = `mongodb://localhost:27017/reviews`;
 const faker = require('faker');
 const fs = require('fs');
 const csvWriter = require('csv-write-stream');
+
 const writer = csvWriter();
 const createReview = require('../createReviews.js').createReviews;
 
@@ -12,14 +13,14 @@ let id = -1;
 let csv = (writer, cb) =>{
   writer.pipe(fs.createWriteStream('sdc.csv'));
   console.log('Generating CSV...');
-  let i = 5000000;
+  let i = 4500000;
    let write=()=> {
     let ok = true;
     do {
       i -= 1;
       id += 1;
       console.log(i);
-      let review = createReviews(id);
+      let review = createReview(id);
       review.reviews.map((rev)=>{
         if (i === 0) {
           writer.write(rev,cb);
@@ -41,12 +42,9 @@ let csv = (writer, cb) =>{
   csv(writer, ()=>{
     writer.end();
     console.log(`Successfully Generated CSV ! Time to Insert into Database`);
-    console.log('Inserting into Database...');
   });
 
 
-
-module.exports = createReviews;
 
 
 
