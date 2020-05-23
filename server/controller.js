@@ -1,4 +1,4 @@
-const  database = require('../database/dbhelpers');
+const  database = require('../database/mongo/dbhelpers');
 
 const controller = {
   getAll: (req, res) =>{

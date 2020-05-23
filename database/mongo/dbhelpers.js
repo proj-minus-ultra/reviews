@@ -32,7 +32,7 @@ module.exports = {
 
         let toFind = req.params
         console.log('TO Find:',toFind);
-        //let image = {image: }
+
         collection.find(toFind).toArray((err, results) =>{
           if(err) {
             cb(err);

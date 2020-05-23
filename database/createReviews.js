@@ -13,7 +13,9 @@ let reviewTitle = [
   'Super Comfy',
   'Quality that can be felt',
   'A little dissapointed',
-  'Amazing!'
+  'Amazing!',
+  'Suberb',
+  'This sucks but I still like it'
 ];
 
 let recommendation = [true, false];
@@ -56,7 +58,12 @@ let bodyTypes = [
       'Hong Kong',
       'Rome',
       'Spain',
-      'Berlin'
+      'Berlin',
+      'Ca',
+      'Naboo',
+      'Coruscant',
+      'The Moon',
+      'Mars'
     ];
   let wearTo = ['practiceYoga', 'dance', 'cycle', 'run', 'wearCasually'];
   let rating = [5, 4, 3, 2, 1];
