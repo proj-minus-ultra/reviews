@@ -6,12 +6,12 @@ router.route('/reviews')
   .delete(controller.delete)
 
 router.route('/reviews/rating/:id')
-  .get(controller.getRatings)
+
 
 router.route('/reviewspost')
   .post(controller.post)
 
-router.route('/reviews/:id')
-  .get(controller.getOne)
+router.route('/reviews/:rev_Id')
+  .get(controller.getSomeReviews)
 
 module.exports = router

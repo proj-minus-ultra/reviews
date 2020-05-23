@@ -3,7 +3,7 @@ const createReview = require('../createReviews.js').createReviews;
 
 
 
-
+//not actual seed script, just seeing how pg worked with node
 let seed = () =>{
   for(let i = 1; i < 2;i++){
     let temp = createReview(i);

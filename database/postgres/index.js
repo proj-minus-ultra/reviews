@@ -1,4 +1,4 @@
-const { Pool, Client } = require('pg');
+const { Client } = require('pg');
 
 const client = new Client({
   user: 'root',
@@ -8,7 +8,7 @@ const client = new Client({
 
 client.connect()
   .then((err)=>{
-    console.log('Connected Successfully');
+    console.log('Connected To Database Successfully');
   })
   .catch((err)=>{
     throw err;
