@@ -1,6 +1,4 @@
-
-DROP DATABASE IF EXISTS sdc;
-CREATE DATABASE sdc;
+DROP TABLE IF EXISTS reviews;
 
 CREATE TABLE reviews(
   id SERIAL primary key,
