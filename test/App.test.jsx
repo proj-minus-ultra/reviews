@@ -424,7 +424,7 @@ describe('retrieve', () => {
   let db;
 
   beforeAll(async () => {
-    connection = await MongoClient.connect('mongodb://localhost/JJACDReviews', {
+    connection = await MongoClient.connect('mongodb://localhost/sdc', {
       useNewUrlParser: true,
       useUnifiedTopology: true
     });
