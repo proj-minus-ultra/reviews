@@ -13,7 +13,6 @@
     "drop": "node database/mongo/drop.js && npm run count",
     "psql": "psql -d sdc -U root",
     "schema": "psql -d sdc -U root -f schema.sql",
-    "index:psql-id" : "node database/postgres/index.js",
     "mongo-seed":"mongoimport --type csv -d sdc -c reviews --headerline --drop sdc.csv"
 
   },
