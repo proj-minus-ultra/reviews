@@ -41,15 +41,6 @@ const controller = {
         res.status(203).send('Deleted Successfully');
       }
     })
-  },
-  getOne: (req,res) =>{
-    database.getImage(req, (err,result) =>{
-      if(err){
-        res.status(404).send(err);
-      } else {
-        res.status(204).send(result);
-      }
-    })
   }
 
 }

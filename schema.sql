@@ -1,8 +1,10 @@
+CREATE DATABASE IF NOT EXISTS sdc;
+
 DROP TABLE IF EXISTS reviews;
 
 CREATE TABLE reviews(
   id SERIAL primary key,
-  rev_Id INT NOT NULL,
+  rev_Id BIGINT NOT NULL,
   rating INT NOT NULL,
   title VARCHAR(200) NOT NULL,
   review VARCHAR(1000) NOT NULL,
