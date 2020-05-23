@@ -72,7 +72,7 @@ module.exports = {
     for(let i = 0; i < constraint; i++){
 
       let review = {};
-      review.id = index;
+      review.rev_Id = index;
       review.rating =  rating[Math.floor(Math.random() * rating.length)];
       review.title = reviewTitle[Math.floor(Math.random() * reviewTitle.length)];
       review.review = faker.lorem.paragraph();
