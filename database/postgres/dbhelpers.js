@@ -19,8 +19,18 @@ module.exports = {
         console.log('ERROR Getting Many Reviews...',err);
       })
   },
-  post(req, cb){
+  postReview(req, cb){
 
+    let query = `INSERT INTO reviews(rev_id,rating,title,review,recommendation,nickname,email,age,bodyType,locat,wearTo,likes,dislikes) Values(${req.body.rev_Id},${req.body.rating},'${req.body.title}','${req.body.review}',${req.body.recommendation}, '${req.body.nickname}', '${req.body.email}','${req.body.age}','${req.body.bodyType}', '${req.body.locat}','${req.body.wearTo}','${req.body.likes}','${req.body.dislikes}');`;
+
+    db.query(query)
+      .then((results)=>{
+        cb(null, results);
+      })
+      .catch((err)=>{
+        cb(err);
+        console.log('ERROR Saving Review To Database...\n',err);
+      })
   },
   delete(req,cb){
 
