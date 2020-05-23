@@ -10,13 +10,15 @@
     "watch": "webpack-dev-server --open",
     "seed": "node database/seed.js && mongoimport --type csv -d sdc -c reviews --headerline --drop sdc.csv",
     "count": "node database/counter.js",
-    "drop": "node database/drop.js && npm run count"
+    "drop": "node database/drop.js && npm run count",
+    "psql": "psql -d postgres -U root",
+    "schema": "psql -d postgres -U root -f schema.sql"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/JJACD/reviews_component.git"
   },
-  "author": "Danny San",
+  "author": "Danny San, Alex Benko",
   "license": "MIT",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.28",
@@ -31,7 +33,6 @@
     "faker": "^4.1.0",
     "moment": "^2.25.3",
     "mongodb": "^3.5.7",
-    "mongoose": "5.9.7",
     "morgan": "1.10.0",
     "nodemon": "2.0.2",
     "react": "16.13.1",
