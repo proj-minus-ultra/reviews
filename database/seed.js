@@ -5,12 +5,13 @@ const fs = require('fs');
 
 const createReview = require('./createReviews.js').createReviews;
 let id = -1;
+
 module.exports = {
 
-  csv (writer, cb){
+  csv (writer,amt,cb){
     writer.pipe(fs.createWriteStream('sdc.csv'));
     console.log('Generating CSV...');
-    let i = 100;
+    let i = amt;
     let write=()=> {
       let ok = true;
       do {
@@ -34,6 +35,7 @@ module.exports = {
       }
         write();
     }
+
 }
 
 
