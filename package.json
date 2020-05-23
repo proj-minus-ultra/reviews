@@ -9,8 +9,8 @@
     "build": "webpack --w --mode development",
     "watch": "webpack-dev-server --open",
     "csv": "node database/seed.js ",
-    "count": "node database/counter.js",
-    "drop": "node database/drop.js && npm run count",
+    "count": "node database/mongo/counter.js",
+    "drop": "node database/mongo/drop.js && npm run count",
     "psql": "psql -d sdc -U root",
     "schema": "psql -d sdc -U root -f schema.sql",
     "mongo-seed":"mongoimport --type csv -d sdc -c reviews --headerline --drop sdc.csv"
