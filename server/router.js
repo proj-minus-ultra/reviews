@@ -5,6 +5,7 @@ router.route('/reviews')
   .get(controller.getAll)
   .delete(controller.delete)
 
+
 router.route('/reviews/rating/:id')
 
 
@@ -13,5 +14,6 @@ router.route('/reviewspost')
 
 router.route('/reviews/:rev_Id')
   .get(controller.getSomeReviews)
+  .post(controller.post)
 
 module.exports = router
