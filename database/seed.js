@@ -13,7 +13,7 @@ let id = -1;
 let csv = (writer, cb) =>{
   writer.pipe(fs.createWriteStream('sdc.csv'));
   console.log('Generating CSV...');
-  let i = 4500000;
+  let i = 10000000;
    let write=()=> {
     let ok = true;
     do {
