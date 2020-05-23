@@ -15,7 +15,8 @@ let reviewTitle = [
   'A little dissapointed',
   'Amazing!',
   'Suberb',
-  'This sucks but I still like it'
+  'This sucks but I still like it',
+  'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
 ];
 
 let recommendation = [true, false];
@@ -45,7 +46,6 @@ let bodyTypes = [
       'London',
       'Texas',
       'Hawaii',
-      'Japan',
       'Seattle',
       'Kyoto',
       'Portland',
@@ -63,7 +63,9 @@ let bodyTypes = [
       'Naboo',
       'Coruscant',
       'The Moon',
-      'Mars'
+      'Mars',
+      'San Diego,Ca',
+
     ];
   let wearTo = ['practiceYoga', 'dance', 'cycle', 'run', 'wearCasually'];
   let rating = [5, 4, 3, 2, 1];
