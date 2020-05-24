@@ -17,16 +17,15 @@ My Trello Board For this Application:
     7. npm run mongo-index . Takes a few minutes
 
 
-4. To Seed With postgres with at least 10 million Primary Entries :
+4. To Seed With PostgreSQL with at least 10 million Primary Entries :
     1. Wait..
     2. Terminal should say 'Generating CSV...'.
-    3. When its done paste this into the terminal (temporary until i figure out a way to make this a npm script):
-    psql -d sdc -U AlexB -c "\COPY reviews(rev_id,rating,title,review,recommendation,nickname,email,age,bodyType,locat,wearTo,likes,dislikes) FROM 'sdc.csv' delimiter ',' csv header ;"
-    4. This script imports the csv file in about 3 minutes so sit tight.
-    5. This will take a few minutes but will eventually ouput 'COPY' plus however many it inputed
+    3. When terminal outputs Successfully Generated CSV ! Time to Insert into Database, type: npm run psql-seed
+    4. This script imports the csv file in no more than 10 minutes so sit tight.
+    5. Will eventually ouput 'COPY' plus however many it inputed
     6. npm run psql
-    7. Paste this into psql interface : CREATE INDEX idx_rev_Id ON reviews(rev_Id);
+    7. Paste this into psql interface : CREATE INDEX idx_rev_Id ON reviews(rev_Id) (TO DO: FIgure out how to make script);
     8. This will index the database, it takes a few minutes. Its done when it says "CREATE INDEX"
     9. control + c to exist psql
 
-5. The total amount inserted into the database varies as every product has a different amount of reviews. Like i just ran it and it created 25,001,202 total pieces of data.
+5. The total amount inserted into the database varies as every product has a different amount of reviews. My most recent seed created 25,001,202 total pieces of data. Which is a total of 25 million different reviews for 10 million psuedo products.
