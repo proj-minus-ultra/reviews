@@ -1,7 +1,8 @@
 const Mongo = require('mongodb').MongoClient;
 const url = `mongodb://localhost`;
 
-
+//https://docs.mongodb.com/manual/indexes/
+// how to index a mongo database
 module.exports = {
   getAllReviews(cb){
     Mongo.connect(url, { useUnifiedTopology: true }, (err,client) =>{
@@ -16,28 +17,6 @@ module.exports = {
           if(err) {
             cb(err);
           } else {
-            cb(null,results);
-          }
-        })
-      }
-    })
-  },
-  getImage(req, cb){
-    Mongo.connect(url, { useUnifiedTopology: true }, (err,client)=>{
-      if(err) {
-        cb(err);
-      } else {
-        const db = client.db('sdc')
-        const collection = db.collection('reviews');
-
-        let toFind = req.params
-        console.log('TO Find:',toFind);
-
-        collection.find(toFind).toArray((err, results) =>{
-          if(err) {
-            cb(err);
-          } else {
-            console.log(results)
             cb(null,results);
           }
         })
@@ -63,7 +42,7 @@ module.exports = {
       }
     })
   },
-  getRatings(req, cb) {
+  getSomeReviews(req, cb) {
     Mongo.connect(url, { useUnifiedTopology: true }, (err,client) =>{
       if(err) {
         cb(err);
@@ -71,13 +50,12 @@ module.exports = {
         const db = client.db('sdc')
         const collection = db.collection('reviews');
 
-        let toFind = req.params
+        let toFind = req.body;
         console.log('To Find:', toFind);
         collection.find(toFind).toArray((err, results) =>{
           if(err) {
             cb(err);
           } else {
-            console.log(results)
             cb(null,results);
           }
         })

@@ -1,5 +1,6 @@
 const { Client } = require('pg');
-
+//https://www.postgresqltutorial.com/postgresql-indexes/postgresql-create-index/
+//simple guide to index a database
 const client = new Client({
   user: 'root',
   host: 'localhost',
