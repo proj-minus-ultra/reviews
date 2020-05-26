@@ -8,7 +8,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 export default function Review({ review }) {
-  console.log('From Review',review);
+
   let homeQuestions = () => {
     let { location, dislikes, likes } = review;
     if (location && dislikes && likes) {
