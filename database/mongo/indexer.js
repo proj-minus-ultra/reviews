@@ -1,6 +1,5 @@
 const Mongo = require('mongodb').MongoClient;
 const url = `mongodb://localhost`;
-//db.reviews.createIndex({rev_Id: -1})
 
 let indexer = ()=>{
   Mongo.connect(url,{ useUnifiedTopology: true }, (err,client)=>{
