@@ -216,8 +216,7 @@ export default class WriteReviewModal extends Component {
 
   render() {
     const data = this.getDataUrl();
-    console.log(this.state)
-    console.log('props', this.props)
+
     return (
       <div
         className={

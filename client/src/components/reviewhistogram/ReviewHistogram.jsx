@@ -13,6 +13,14 @@ export default class ReviewHistogram extends Component {
   }
 
   getCount() {
+    let countRatings = [];
+
+    this.props.ratingsData.map((review)=>{
+      countRatings.push(review.rating)
+    })
+
+    console.log('Count Ratings:',countRatings)
+
     let count = {
       ratingFive: 0,
       ratingFour: 0,
@@ -20,11 +28,11 @@ export default class ReviewHistogram extends Component {
       ratingTwo: 0,
       ratingOne: 0
     };
-    if (this.props.ratingsData === []) {
+    if (countRatings === []) {
       return count;
     } else {
-      let { ratingsData } = this.props;
-      ratingsData.map((rate) => {
+
+      countRatings.map((rate) => {
         for (let i = 0; i < rate.length; i++) {
           if (rate[i].rating === 5) {
             count['ratingFive']++;
@@ -75,6 +83,16 @@ export default class ReviewHistogram extends Component {
   }
 
   render() {
+    let ratings = [];
+
+    this.props.ratingsData.map((review)=>{
+      ratings.push(review.rating)
+    })
+
+
+
+
+
     let ratingCount = this.getCount();
     let totalReviews = this.allReviewCount();
     let averageReviewCount =
@@ -89,9 +107,8 @@ export default class ReviewHistogram extends Component {
         ratingCount.ratingOne) * 20
 
     let averageCount =
-      this.props.ratingsData === []
-        ? 0
-        : (ratingCount.ratingFive * 5 +
+        ratings === [] ? 0:
+          (ratingCount.ratingFive * 5 +
             ratingCount.ratingFour * 4 +
             ratingCount.ratingThree * 3 +
             ratingCount.ratingTwo * 2 +
