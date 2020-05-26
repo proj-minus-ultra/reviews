@@ -26,20 +26,18 @@ export default class App extends Component {
     super(props);
     this.state = {
       reviewData: [],
-      ratingsData: [],
       filteredReviewData: [],
       modalToggle: false,
       reviewSearch: '',
       singleReview: [],
       singleReviewToggle: false,
       filteredRatingData: [],
-      reviewDisplayToggle: false, 
+      reviewDisplayToggle: false,
       reviewLimit: 8,
       writeReviewToggle: false,
       randomId: 1
     };
-    this.getData = this.getData.bind(this);
-    this.getRatings = this.getRatings.bind(this)
+    this.getReviews = this.getReviews.bind(this);
     this.modalHandler = this.modalHandler.bind(this);
     this.searchQueryChanger = this.searchQueryChanger.bind(this);
     this.getFilteredData = this.getFilteredData.bind(this);
@@ -54,12 +52,7 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    const randomIdGen = Math.ceil(Math.random() * 100)
-    this.setState({randomId: randomIdGen}, () => {
-      this.getData(this.state.randomId);
-      this.getRatings(this.state.randomId)
-    })
-
+   this.getReviews();
   }
 
   getFilteredData(id) {
@@ -67,29 +60,26 @@ export default class App extends Component {
     axios
       .get(`http://localhost:9000/reviews/searchQuery/${id}`, { params: { query: reviewSearch }, headers:{'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'} }, )
       .then((data) => {
-        this.setState(
-          {
+        this.setState({
             filteredReviewData: data.data
           });
       });
   }
 
-  getData(id) {
-    axios.get(`http://localhost:9000/reviews/${id}`, {headers:{'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'}}).then((data) => {
-      this.setState(
-        {
-          reviewData: data.data
-        });
-    });
-  }
+  getReviews(){
+    //generates a random number between the first product review id (0) and the last 9999999
+    //which makes sense since there are 10 million total products
+    let rev_Id = Math.floor(Math.random() * 9999999);
+    axios.get(`http://localhost:9000/reviews/${rev_Id}`)
+    .then((data) => {
 
-  getRatings(id){
-    axios.get(`http://localhost:9000/reviews/rating/${id}`, {headers:{'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'}})
-    .then(data => {
       this.setState({
-        ratingsData: data.data
-      })
+        reviewData: data.data
+      },()=>{console.log('Got Reviews!:',this.state.reviewData);})
     })
+    .catch((err)=>{
+      console.error('Error Getting Reviews:',err);
+    });
   }
 
   modalHandler() {
@@ -159,7 +149,7 @@ export default class App extends Component {
       writeReviewToggle: !this.state.writeReviewToggle
     });
 }
-  
+
 
   render() {
     return (
@@ -178,7 +168,7 @@ export default class App extends Component {
             filteredReviewData={this.state.filteredReviewData}
             searchQueryChanger={this.searchQueryChanger}
             getFilteredData={this.onModalSearchClick}
-            singleReview={this.state.singleReview}
+            singleReview={this.state.reviewData[0]}
             singleReviewClickHandler={this.singleReviewClickHandler}
           />
         </div>
@@ -187,7 +177,7 @@ export default class App extends Component {
           <WriteReview writeReviewToggle={this.state.writeReviewToggle} writeReviewToggleHandler={this.writeReviewToggleHandler}/>
         </div>
         <div className="reviews-histogram-container">
-          <ReviewHistogram ratingsData={this.state.ratingsData} ratingFilterHandler={this.ratingFilterHandler} reviewDisplayToggleHandlerTrue={this.reviewDisplayToggleHandlerTrue}/>
+          <ReviewHistogram ratingsData={this.state.reviewData} ratingFilterHandler={this.ratingFilterHandler} reviewDisplayToggleHandlerTrue={this.reviewDisplayToggleHandlerTrue}/>
         </div>
         <div className="main-filter-review-container">
           <FilterOption reviewData={this.state.reviewData} reviewLimit={this.state.reviewLimit}/>

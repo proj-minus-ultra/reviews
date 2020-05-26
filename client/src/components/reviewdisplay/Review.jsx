@@ -7,9 +7,10 @@ import {
   faStar
 } from '@fortawesome/free-solid-svg-icons';
 
-export default function Review({ post }) {
+export default function Review({ review }) {
+  console.log('From Review',review);
   let homeQuestions = () => {
-    let { location, dislikes, likes } = post;
+    let { location, dislikes, likes } = review;
     if (location && dislikes && likes) {
       return (
         <div className="home-content-product-question">
@@ -43,7 +44,7 @@ export default function Review({ post }) {
   };
 
   let homeRecommendation = () => {
-    let { recommendation } = post;
+    let { recommendation } = review;
     if (recommendation === false) {
       return (
         <div className="review-home-recommendation-message">
@@ -68,7 +69,7 @@ export default function Review({ post }) {
   };
 
   let starCount = () => {
-    let { rating } = post;
+    let { rating } = review;
     if (rating === 5) {
       return (
         <span className="review-home-star-container">
@@ -147,20 +148,20 @@ export default function Review({ post }) {
       <div className="review-content-header">
         <div className="review-stars">{starCount()}</div>
         <div className="review-home-nickname">
-          <span>{post.nickname}</span>
+          <span>{review.nickname}</span>
         </div>
         <div className="review-home-created">
           <span>· </span>
-          <span>{moment(post.created_at).fromNow()}</span>
+          <span>{moment(Date.now()).fromNow()}</span>
         </div>
       </div>
       <div className="reivew-home-title-container">
         <div className="reivew-home-title">
-          <h3 className="review-home-title-h3">{post.title}</h3>
+          <h3 className="review-home-title-h3">{review.title}</h3>
         </div>
       </div>
       <div className="review-home-content-body-container">
-        <div className="review-home-content-body">{post.review}</div>
+        <div className="review-home-content-body">{review.review}</div>
       </div>
       <div className="review-home-product-question-container">
         {homeQuestions()}

@@ -7,27 +7,32 @@ export default class FilterOption extends Component {
     this.reviewCount = this.reviewCount.bind(this)
   }
   reviewCount(){
-    let {reviewData, reviewLimit} = this.props
-    let firstNum
-    let secondNum
-    let total
+    let {reviewData, reviewLimit} = this.props;
+    let firstNum;
+    let secondNum;
+    let total;
+    let reviews = []
 
-    if(reviewData.length < 1){
+    reviewData.map((review)=>{
+      reviews.push(review.review);
+    })
+
+    if(reviews.length < 1){
       return(
         <span>0</span>
       )
     } else {
-      if(reviewData[0].reviews.length < 1){
+      if(reviews.length < 1){
         firstNum = 0
       } else {
         firstNum = 1
       }
-      if(reviewData[0].reviews.length < reviewLimit){
-        secondNum = reviewData[0].reviews.length
+      if(reviews.length < reviewLimit){
+        secondNum = reviews.length
       } else {
         secondNum = reviewLimit
       }
-      total = reviewData[0].reviews.length
+      total = reviews.length
       return (
         <span>{firstNum}-{secondNum} of {total}</span>
       )
