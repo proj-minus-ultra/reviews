@@ -21,3 +21,7 @@ My Trello Board For this Application:
 
 
 5. The total amount inserted into the database varies as every product has a different amount of reviews. My most recent seed created 25,001,202 total pieces of data. Which is a total of 25 million different reviews for 10 million psuedo products.
+
+6. To Stress Test:
+    1. GET: npm run stress-get
+    2. POST: npm run stress-post
