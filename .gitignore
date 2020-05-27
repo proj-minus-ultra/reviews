@@ -4,3 +4,5 @@ old_server
 client/dist/main.js
 .vscode
 sdc.csv
+newrelic.js
+newrelic_agent.log

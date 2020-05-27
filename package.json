@@ -13,10 +13,11 @@
     "drop": "node database/mongo/drop.js && npm run count",
     "psql": "psql -d sdc -U root",
     "schema": "psql -d sdc -U root -f schema.sql",
-    "mongo-seed":"mongoimport --type csv -d sdc -c reviews --headerline --drop sdc.csv",
-    "mongo-index":"node database/mongo/indexer.js",
-    "psql-seed":"psql -d sdc -U AlexB -c '\\COPY reviews(rev_id,rating,title,review,recommendation,nickname,email,age,bodyType,locat,wearTo,likes,dislikes) FROM 'sdc.csv' csv header ;'"
-
+    "mongo-seed": "mongoimport --type csv -d sdc -c reviews --headerline --drop sdc.csv",
+    "mongo-index": "node database/mongo/indexer.js",
+    "psql-seed": "psql -d sdc -U AlexB -c '\\COPY reviews(rev_id,rating,title,review,recommendation,nickname,email,age,bodyType,locat,wearTo,likes,dislikes) FROM 'sdc.csv' csv header ;'",
+    "stress-get":"artillery run stress-test/get.yml",
+    "stress-post":"artillery run stress-test/post.yml"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.28",
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@fortawesome/react-fontawesome": "^0.1.9",
+    "artillery": "^1.6.0",
     "axios": "0.19.2",
     "body-parser": "1.19.0",
     "cors": "2.8.5",
@@ -38,6 +40,7 @@
     "moment": "^2.25.3",
     "mongodb": "^3.5.7",
     "morgan": "1.10.0",
+    "newrelic": "^6.8.0",
     "nodemon": "2.0.2",
     "pg": "^8.2.1",
     "react": "16.13.1",
