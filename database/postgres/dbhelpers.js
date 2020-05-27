@@ -17,7 +17,7 @@ module.exports = {
   },
   postReview(req, cb){
 
-    let query = `INSERT INTO reviews(rev_id,rating,title,review,recommendation,nickname,email,age,bodyType,locat,wearTo,likes,dislikes) Values(${req.body.rev_Id},${req.body.rating},'${req.body.title}','${req.body.review}',${req.body.recommendation}, '${req.body.nickname}', '${req.body.email}','${req.body.age}','${req.body.bodyType}', '${req.body.locat}','${req.body.wearTo}','${req.body.likes}','${req.body.dislikes}');`;
+    let query = `INSERT INTO reviews(rev_id,rating,title,review,recommendation,nickname,email,age,bodyType,locat,wearTo,likes,dislikes) Values(${req.rev_Id},${req.rating},'${req.title}','${req.review}',${req.recommendation}, '${req.nickname}', '${req.email}','${req.age}','${req.bodyType}', '${req.locatation}','${req.wearTo}','${req.ikes}','${req.dislikes}');`;
 
     db.query(query)
       .then((results)=>{

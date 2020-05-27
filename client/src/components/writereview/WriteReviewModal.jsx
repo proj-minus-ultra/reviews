@@ -2,141 +2,49 @@ import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios'
+import faker from 'faker';
 
 export default class WriteReviewModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      img: faker.image.imageUrl(),
       rating: "",
       title: "",
       review: "",
-      recommendation: "",
+      recommendation: false,
       nickname: "",
       email: "",
-      age: {
-        noAge: false,
-        under18: false,
-        between1824: false,
-        between2534: false,
-        between3544: false,
-        between4554: false,
-        between5565: false,
-        over65: false
-      },
-      bodyType: {
-        atheletic: false,
-        curvy: false,
-        lean: false,
-        muscular: false,
-        petite: false,
-        slim: false,
-        solid: false
-      },
+      age: "",
+      bodyType: "",
       location: "",
-      wearTo: {
-        practiceYoga: false,
-        dance: false,
-        cycle: false,
-        run: false,
-        wearCasually: false
-      },
+      wearTo: "",
       likes: "",
       dislikes: "",
       agreementCheck: false
     };
-    this.getDataUrl = this.getDataUrl.bind(this);
-    this.hoverRatingEventHandler = this.hoverRatingEventHandler.bind(this)
-    this.onChangeHandler = this.onChangeHandler.bind(this)
-    this.ageChangeHandler = this.ageChangeHandler.bind(this)
-    this.bodyTypeChangeHandler = this.bodyTypeChangeHandler.bind(this)
-    this.wearToChangeHandler = this.wearToChangeHandler.bind(this)
-    this.onChangeAgreement = this.onChangeAgreement.bind(this)
-    this.postReview = this.postReview.bind(this)
+
+    this.hoverRatingEventHandler = this.hoverRatingEventHandler.bind(this);
+    this.onChangeHandler = this.onChangeHandler.bind(this);
+    this.onChangeAgreement = this.onChangeAgreement.bind(this);
+    this.postReview = this.postReview.bind(this);
+    this.recommendChange = this.recommendChange.bind(this);
   }
 
-  getDataUrl() {
-    const productData = {
-      imageUrl: '',
-      productTitle: '',
-      _id: 0,
-      productID: 0
-    };
-    const { reviewData } = this.props;
-    if (reviewData === undefined) {
-      return null;
-    }
-    for (let i = 0; i < reviewData.length; i++) {
-      productData.imageUrl = reviewData[i].image;
-      productData.productTitle = reviewData[i].productTitle;
-      productData._id = reviewData[i]._id;
-      productData.productID = reviewData[i].productID
-    }
-    return productData;
-  }
+
 
   hoverRatingEventHandler(rating){
+
     this.setState({
       rating: rating
-    })
+    },()=>console.log(this.state.rating))
   }
 
   onChangeHandler(e){
     e.preventDefault()
-    let {name, value} = e.target
-    this.setState({
-      [name]: value
-    })
-  }
 
-  ageChangeHandler(e){
-    let ageValue = {
-      noAge: false,
-      under18: false,
-      between1824: false,
-      between2534: false,
-      between3544: false,
-      between4554: false,
-      between5565: false,
-      over65: false
-    }
-    let {value} = e.target
-    let changeValue = value
-    ageValue[changeValue] = true
     this.setState({
-      age: ageValue
-    })
-  }
-
-  bodyTypeChangeHandler(e){
-    let bodyTypeValue = {
-      atheletic: false,
-      curvy: false,
-      lean: false,
-      muscular: false,
-      petite: false,
-      slim: false,
-      solid: false
-    }
-    let {value} = e.target
-    let changeValue = value
-    bodyTypeValue[changeValue] = true
-    this.setState({
-      bodyType: bodyTypeValue
-    })
-  }
-  wearToChangeHandler(e){
-    let wearToValue= {
-      practiceYoga: false,
-      dance: false,
-      cycle: false,
-      run: false,
-      wearCasually: false
-    }
-    let {value} = e.target
-    let changeValue = value
-    wearToValue[changeValue] = true
-    this.setState({
-      wearTo: wearToValue
+      [e.target.name]: e.target.value
     })
   }
 
@@ -147,9 +55,10 @@ export default class WriteReviewModal extends Component {
   }
 
   postReview(e, id){
-    const data = this.getDataUrl();
+
     e.preventDefault()
     let obj = {
+      rev_Id: this.props.rev_Id,
       rating: this.state.rating,
       title: this.state.title,
       review: this.state.review,
@@ -163,12 +72,11 @@ export default class WriteReviewModal extends Component {
       likes: this.state.likes,
       dislikes: this.state.dislikes
     }
-    axios.post(`http://localhost:9000/reviewspost`, obj)
+    axios.post(`http://localhost:9000/reviews/${this.props.rev_Id}`, obj)
     .then(() => {
       console.log('posted Review')
     })
     .then(() => {
-      this.props.getData(data.productID)
       this.setState({
         rating: "",
         title: "",
@@ -176,33 +84,10 @@ export default class WriteReviewModal extends Component {
         recommendation: "",
         nickname: "",
         email: "",
-        age: {
-          noAge: false,
-          under18: false,
-          between1824: false,
-          between2534: false,
-          between3544: false,
-          between4554: false,
-          between5565: false,
-          over65: false
-        },
-        bodyType: {
-          atheletic: false,
-          curvy: false,
-          lean: false,
-          muscular: false,
-          petite: false,
-          slim: false,
-          solid: false
-        },
+        age: "",
+        bodyType: "",
         location: "",
-        wearTo: {
-          practiceYoga: false,
-          dance: false,
-          cycle: false,
-          run: false,
-          wearCasually: false
-        },
+        wearTo: "",
         likes: "",
         dislikes: "",
         agreementCheck: false
@@ -214,9 +99,17 @@ export default class WriteReviewModal extends Component {
   }
 
 
-  render() {
-    const data = this.getDataUrl();
 
+  recommendChange(e){
+    console.log('Clicked');
+    e.preventDefault();
+    this.setState({
+      recommendation: !this.state.recommendation
+    },()=>console.log(this.state.recommendation))
+  }
+
+
+  render() {
     return (
       <div
         className={
@@ -232,9 +125,9 @@ export default class WriteReviewModal extends Component {
           </span>
           <div className="write-review-modal-content">
             <div className="write-review-image-container">
-              <img className="write-review-image" src={data.imageUrl} />
+              <img className="write-review-image" src={this.state.img} />
               <div className="write-review-product-title">
-                <span>{data.productTitle}</span>
+                <span>Shirt</span>
               </div>
             </div>
             <div className="write-review-form-container">
@@ -242,7 +135,7 @@ export default class WriteReviewModal extends Component {
                 <h1>
                   <span className="write-review-title">
                     My Review for {" "}
-                    {data.productTitle}
+                    Shirt
                   </span>
                 </h1>
               </div>
@@ -276,8 +169,8 @@ export default class WriteReviewModal extends Component {
                   <div className="write-review-recommendation-container">
                     <span className="write-review-recommendation-title"> Would you recommend this product to a friend?  </span>
                     <span className="write-reivew-recommendation-button-container">
-                      <button onClick={this.onChangeHandler} name="recommendation" className="write-reivew-recommendation-button1" value="true">Yes</button>
-                      <button onClick={this.onChangeHandler} name="recommendation"  className="write-reivew-recommendation-button2" value="false">No</button>
+                      <button onClick={this.recommendChange} name="recommendation" className="write-reivew-recommendation-button1" value="true">Yes</button>
+                      <button onClick={this.recommendChange} name="recommendation"  className="write-reivew-recommendation-button2" value="false">No</button>
                     </span>
                   </div>
                   <hr className="write-review-hr" />
@@ -293,22 +186,22 @@ export default class WriteReviewModal extends Component {
                   <hr className="write-review-hr" />
                   <div className="write-review-age-container">
                     <span className="write-review-age-title"> How old are you? </span>
-                    <select onChange={this.ageChangeHandler} className="write-review-age-input">
+                    <select onChange={this.onChangeHandler} name="age" value={this.state.age} className="write-review-age-input">
                       <option >Select</option>
-                      <option value="noAge" name="noAge">I keep my age on the d.l.</option>
-                      <option value="under18" name="under18">under 18</option>
-                      <option value="between1824" name="between1824">18-24</option>
-                      <option value="between2534" name="between2534">25-34</option>
-                      <option value="between3544" name="between3544">35-44</option>
-                      <option value="between4554" name="between4554">45-54</option>
-                      <option value="between5565" name="between5565">55-65</option>
-                      <option value="over65" name="over65">over 65</option>
+                      <option value="noAge" >I keep my age on the d.l.</option>
+                      <option value="under18" >under 18</option>
+                      <option value="between1824"  >18-24</option>
+                      <option value="between2534" >25-34</option>
+                      <option value="between3544" >35-44</option>
+                      <option value="between4554" >45-54</option>
+                      <option value="between5565" >55-65</option>
+                      <option value="over65" >over 65</option>
                     </select>
                   </div>
                   <hr className="write-review-hr" />
                   <div className="write-review-body-type-container">
                     <span className="write-review-body-type-title"> What's your body type?</span>
-                    <select onChange={this.bodyTypeChangeHandler} className="write-review-body-type-input">
+                    <select onChange={this.onChangeHandler} name="bodyType" value={this.state.bodyType} className="write-review-body-type-input">
                       <option>Select</option>
                       <option value="athletic">Athletic</option>
                       <option value="curvy">Curvy</option>
@@ -327,7 +220,7 @@ export default class WriteReviewModal extends Component {
                   <hr className="write-review-hr" />
                   <div className="write-review-wear-to-container">
                     <span className="write-review-wear-to-title">I mainly wear my Lululemon gear to..</span>
-                    <select onChange={this.wearToChangeHandler} className="write-review-wear-to-input">
+                    <select onChange={this.onChangeHandler} value={this.state.wearTo} name="wearTo" className="write-review-wear-to-input">
                       <option>Select</option>
                       <option value="practiceYoga">Practice Yoga</option>
                       <option value="dance">Dance</option>
@@ -356,7 +249,7 @@ export default class WriteReviewModal extends Component {
                   </div>
                   <div className="write-review-form-footer-container">
                     <p className="write-review-promotion-agreement-text">You may receive emails regarding this submission. Any emails will include the ability to opt-out of future communications.</p>
-                    <button onClick={(e) => this.postReview(e, data._id)} className="post-review-button">POST REVIEW</button>
+                    <button onClick={(e) => this.postReview(e)} className="post-review-button">POST REVIEW</button>
                   </div>
                 </form>
               </div>
