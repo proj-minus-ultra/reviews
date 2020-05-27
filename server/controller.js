@@ -2,7 +2,6 @@ const database = require('../database/postgres/dbhelpers');
 
 const controller = {
   post: (req, res) =>{
-    console.log('From Controller:',req.body);
     database.postReview(req.body, (err, result) =>{
       if(err) {
         console.log('Error Adding Review:', err);
@@ -23,11 +22,12 @@ const controller = {
     })
   },
   delete: (req,res) =>{
-    database.deleteReview(req, (err, result) =>{
+    database.delete(req, (err, result) =>{
       if(err) {
         res.status(404).send(err);
       } else {
-        res.status(203).send('Deleted Successfully');
+        console.log(`Successfully Deleted ${req.params.rev_Id}`);
+        res.status(203).send(`Successfully Deleted ${req.params.rev_Id} `);
       }
     })
   },

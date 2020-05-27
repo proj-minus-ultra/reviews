@@ -29,7 +29,14 @@ module.exports = {
       })
   },
   delete(req,cb){
-
+    let query = `DELETE FROM reviews WHERE rev_Id = ${req.params.rev_Id}`;
+    db.query(query)
+      .then((results)=>{
+        cb(null,results)
+      })
+      .catch((err)=>{
+        cb(err)
+      })
   },
   update(req,cb){
 
