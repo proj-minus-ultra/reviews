@@ -39,7 +39,17 @@ module.exports = {
       })
   },
   update(req,cb){
+    console.log(req.body)
+    let query = `UPDATE reviews SET review = '${req.body.review}' WHERE nickname = '${req.body.nickname}' AND rev_Id = ${req.body.rev_Id};`;
 
+    db.query(query)
+      .then((results)=>{
+        cb(null,results);
+      })
+      .catch((err)=>{
+        console.log(err);
+        cb(err);
+      })
   }
 
 }

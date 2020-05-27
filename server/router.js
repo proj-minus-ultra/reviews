@@ -6,5 +6,6 @@ router.route('/reviews/:rev_Id')
   .get(controller.getSomeReviews)
   .post(controller.post)
   .delete(controller.delete)
+  .put(controller.update)
 
 module.exports = router

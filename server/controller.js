@@ -32,6 +32,14 @@ const controller = {
     })
   },
   update: (req,res) =>{
+    database.update(req, (err,result)=>{
+      if (err) {
+        res.status(404).send(err);
+      } else {
+        console.log('Successfully Updated!');
+        res.status(204).send(result);
+      }
+    })
 
   }
 
