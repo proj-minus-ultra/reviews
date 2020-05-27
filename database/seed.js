@@ -16,6 +16,7 @@ module.exports = {
         id += 1;
         console.log(i);
         let review = createReview(id);
+
         review.reviews.map((rev)=>{
           if (i === 0) {
             writer.write(rev,cb);
@@ -24,6 +25,7 @@ module.exports = {
             ok = writer.write(rev);
           }
         })
+
       } while (i > 0 && ok);
         if (i > 0) {
           // write some more once it drains

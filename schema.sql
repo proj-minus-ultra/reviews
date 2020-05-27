@@ -1,4 +1,4 @@
-CREATE DATABASE IF NOT EXISTS sdc;
+CREATE DATABASE sdc;
 
 DROP TABLE IF EXISTS reviews;
 
@@ -18,3 +18,4 @@ CREATE TABLE reviews(
   likes VARCHAR(50) NOT NULL,
   dislikes VARCHAR(50) NOT NULL
 );
+

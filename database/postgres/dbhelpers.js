@@ -17,7 +17,7 @@ module.exports = {
   },
   postReview(req, cb){
 
-    let query = `INSERT INTO reviews(rev_id,rating,title,review,recommendation,nickname,email,age,bodyType,locat,wearTo,likes,dislikes) Values(${req.body.rev_Id},${req.body.rating},'${req.body.title}','${req.body.review}',${req.body.recommendation}, '${req.body.nickname}', '${req.body.email}','${req.body.age}','${req.body.bodyType}', '${req.body.locat}','${req.body.wearTo}','${req.body.likes}','${req.body.dislikes}');`;
+    let query = `INSERT INTO reviews(rev_id,rating,title,review,recommendation,nickname,email,age,bodyType,locat,wearTo,likes,dislikes) Values(${req.rev_Id},${req.rating},'${req.title}','${req.review}',${req.recommendation}, '${req.nickname}', '${req.email}','${req.age}','${req.bodyType}', '${req.locatation}','${req.wearTo}','${req.ikes}','${req.dislikes}');`;
 
     db.query(query)
       .then((results)=>{
@@ -29,10 +29,27 @@ module.exports = {
       })
   },
   delete(req,cb){
-
+    let query = `DELETE FROM reviews WHERE rev_Id = ${req.params.rev_Id}`;
+    db.query(query)
+      .then((results)=>{
+        cb(null,results)
+      })
+      .catch((err)=>{
+        cb(err)
+      })
   },
   update(req,cb){
+    console.log(req.body)
+    let query = `UPDATE reviews SET review = '${req.body.review}' WHERE nickname = '${req.body.nickname}' AND rev_Id = ${req.body.rev_Id};`;
 
+    db.query(query)
+      .then((results)=>{
+        cb(null,results);
+      })
+      .catch((err)=>{
+        console.log(err);
+        cb(err);
+      })
   }
 
 }

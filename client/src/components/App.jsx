@@ -35,7 +35,8 @@ export default class App extends Component {
       reviewDisplayToggle: false,
       reviewLimit: 8,
       writeReviewToggle: false,
-      randomId: 1
+      randomId: 1,
+      rev_Id: Math.floor(Math.random() * 9999999)
     };
     this.getReviews = this.getReviews.bind(this);
     this.modalHandler = this.modalHandler.bind(this);
@@ -70,7 +71,7 @@ export default class App extends Component {
     //generates a random number between the first product review id (0) and the last 9999999
     //which makes sense since there are 10 million total products
     let rev_Id = Math.floor(Math.random() * 9999999);
-    axios.get(`http://localhost:9000/reviews/${rev_Id}`)
+    axios.get(`http://localhost:9000/reviews/${this.state.rev_Id}`)
     .then((data) => {
 
       this.setState({
@@ -186,7 +187,7 @@ export default class App extends Component {
           <ReviewDisplay filteredRatingData={this.state.filteredRatingData} reviewData={this.state.reviewData} reviewDisplayToggle={this.state.reviewDisplayToggle} reviewDisplayToggleHandlerFalse={this.reviewDisplayToggleHandlerFalse} reviewLimit={this.state.reviewLimit} />
         </div>
         <div className="main-write-review-modal-container">
-          <WriteReviewModal getData={this.getData} writeReviewToggleHandler={this.writeReviewToggleHandler} writeReviewToggle={this.state.writeReviewToggle} reviewData={this.state.reviewData}/>
+          <WriteReviewModal rev_Id={this.state.rev_Id}writeReviewToggleHandler={this.writeReviewToggleHandler} writeReviewToggle={this.state.writeReviewToggle} reviewData={this.state.reviewData}/>
         </div>
         <div className="review-display-load-more-container">
           <button className="review-load-more-button" onClick={this.onLoadMore}><span className="review-load-more-text">Load More</span></button>

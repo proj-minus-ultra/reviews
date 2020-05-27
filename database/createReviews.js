@@ -16,7 +16,9 @@ let reviewTitle = [
   'Amazing!',
   'Suberb',
   'This sucks but I still like it',
-  'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+  'How to wear a mask?',
+  'Google how to leave a review on a lululemon products',
+  'You Have to Get This'
 ];
 
 let recommendation = [true, false];
@@ -73,10 +75,9 @@ let bodyTypes = [
 module.exports = {
   createReviews(index){
     let mockProduct = {}
-    let constraint = Math.floor(Math.random() * 6);
+    let constraint = Math.floor(Math.random() * 7) + 1;
 
-
-    mockProduct.reviews = []
+    mockProduct.reviews = [];
 
     for(let i = 0; i < constraint; i++){
 
@@ -102,3 +103,5 @@ module.exports = {
       return mockProduct;
   }
 }
+
+
