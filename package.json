@@ -13,10 +13,9 @@
     "drop": "node database/mongo/drop.js && npm run count",
     "psql": "psql -d sdc -U root",
     "schema": "psql -d sdc -U root -f schema.sql",
-    "mongo-seed":"mongoimport --type csv -d sdc -c reviews --headerline --drop sdc.csv",
-    "mongo-index":"node database/mongo/indexer.js",
-    "psql-seed":"psql -d sdc -U AlexB -c '\\COPY reviews(rev_id,rating,title,review,recommendation,nickname,email,age,bodyType,locat,wearTo,likes,dislikes) FROM 'sdc.csv' csv header ;'"
-
+    "mongo-seed": "mongoimport --type csv -d sdc -c reviews --headerline --drop sdc.csv",
+    "mongo-index": "node database/mongo/indexer.js",
+    "psql-seed": "psql -d sdc -U AlexB -c '\\COPY reviews(rev_id,rating,title,review,recommendation,nickname,email,age,bodyType,locat,wearTo,likes,dislikes) FROM 'sdc.csv' csv header ;'"
   },
   "repository": {
     "type": "git",
@@ -38,6 +37,7 @@
     "moment": "^2.25.3",
     "mongodb": "^3.5.7",
     "morgan": "1.10.0",
+    "newrelic": "^6.8.0",
     "nodemon": "2.0.2",
     "pg": "^8.2.1",
     "react": "16.13.1",
