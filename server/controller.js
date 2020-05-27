@@ -2,6 +2,7 @@ const database = require('../database/postgres/dbhelpers');
 
 const controller = {
   post: (req, res) =>{
+    console.log(req.body)
     database.postReview(req.body, (err, result) =>{
       if(err) {
         console.log('Error Adding Review:', err);

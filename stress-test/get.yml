@@ -1,9 +1,11 @@
 config:
   target: "http://localhost:9000"
   phases:
-    - duration: 1
-      arrivalRate: 10
+    - duration: 60
+      arrivalRate: 100
+
+
 scenarios:
   - flow:
     - get:
-        url: "/reviews/801231"
+        url: "/reviews/523432"

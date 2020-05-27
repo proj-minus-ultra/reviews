@@ -2,18 +2,23 @@ config:
   target: "http://localhost:9000"
   phases:
     - duration: 60
-      arrivalRate: 1
+      arrivalRate: 100
+
 scenarios:
   - flow:
     - post:
-        url: "/reviews/10000000"
-        csv:
-          rev_Id: 10000000
+        url: "/reviews/10000003"
+        json:
+          rev_Id: 10000003
           rating: 5
           title: "I love SDC"
           review: "Gimme dat stress test"
           recommendation: true
           nickname: "hrla26"
+          email: "hrla@36.com"
+          age: "noage"
+          bodyType: "curvy"
           location: "Lost Angeles"
+          weareTo: "casual"
           likes: "Seeding"
           dislikes: "scaling"
