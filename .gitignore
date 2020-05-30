@@ -6,3 +6,4 @@ client/dist/main.js
 sdc.csv
 newrelic.js
 newrelic_agent.log
+database/postgres/config.js
