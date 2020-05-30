@@ -16,8 +16,8 @@
     "mongo-seed": "mongoimport --type csv -d sdc -c reviews --headerline --drop sdc.csv",
     "mongo-index": "node database/mongo/indexer.js",
     "psql-seed": "psql -d sdc -U AlexB -c '\\COPY reviews(rev_id,rating,title,review,recommendation,nickname,email,age,bodyType,locat,wearTo,likes,dislikes) FROM 'sdc.csv' csv header ;'",
-    "stress-get":"artillery run stress-test/get.yml",
-    "stress-post":"artillery run stress-test/post.yml"
+    "stress-get": "artillery run stress-test/get.yml",
+    "stress-post": "artillery run stress-test/post.yml"
   },
   "repository": {
     "type": "git",
@@ -38,7 +38,6 @@
     "express": "4.17.1",
     "faker": "^4.1.0",
     "moment": "^2.25.3",
-    "mongodb": "^3.5.7",
     "morgan": "1.10.0",
     "newrelic": "^6.8.0",
     "nodemon": "2.0.2",

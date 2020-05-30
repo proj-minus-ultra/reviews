@@ -1,8 +1,8 @@
 config:
   target: "http://localhost:9000"
   phases:
-    - duration: 60
-      arrivalRate: 100
+    - duration: 30
+      arrivalRate: 1
 
 scenarios:
   - flow:
@@ -14,11 +14,11 @@ scenarios:
           title: "I love SDC"
           review: "Gimme dat stress test"
           recommendation: true
-          nickname: "hrla26"
+          nickname: "hrla36"
           email: "hrla@36.com"
           age: "noage"
           bodyType: "curvy"
-          location: "Lost Angeles"
+          location: "Los Angeles"
           weareTo: "casual"
           likes: "Seeding"
           dislikes: "scaling"
