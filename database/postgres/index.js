@@ -1,10 +1,15 @@
-const { Client } = require('pg');
+const { Pool } = require('pg');
+const ubuntu = require('./config.js');
 //https://www.postgresqltutorial.com/postgresql-indexes/postgresql-create-index/
 //simple guide to index a database
-const client = new Client({
-  user: 'root',
-  host: 'localhost',
-  database: 'sdc'
+//change host to 'localhost', remove port, and possibly password for just local use
+//if you cloned this, you need to change the password to whatever your password is
+const client = new Pool({
+  user: 'alex',
+  host: ubuntu.host,
+  database: 'sdc',
+  port:'5432',
+  password: ubuntu.password
 });
 
 client.connect()
@@ -28,7 +33,7 @@ let indexer = () =>{
   let query = "CREATE INDEX idx_rev_Id ON reviews(rev_Id);";
   db.query(query)
   .then(()=>{
-    console.log('Indexed revies on rev_Id successfully');
+    console.log('Indexed  on rev_Id successfully');
   })
   .then(()=>{
     db.end();

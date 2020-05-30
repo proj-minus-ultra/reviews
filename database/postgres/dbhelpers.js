@@ -4,7 +4,7 @@ module.exports = {
 
   getSomeReviews(req,cb){
     //rating username title review locat likes dislikes recom
-    let query = `SELECT rev_Id,rating,title,review,recommendation,nickname,locat,likes,dislikes FROM reviews WHERE rev_Id = ${req.rev_Id};`;
+    let query = `SELECT rev_Id,rating,title,review,recommendation,nickname,likes,dislikes FROM reviews WHERE rev_Id = ${req.rev_Id};`;
 
     db.query(query)
       .then((results)=>{

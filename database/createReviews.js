@@ -75,17 +75,17 @@ let bodyTypes = [
 module.exports = {
   createReviews(index){
     let mockProduct = {}
-    let constraint = Math.floor(Math.random() * 7) + 1;
+    let constraint = Math.floor(Math.random() * 3) + 1;
 
     mockProduct.reviews = [];
 
-    for(let i = 0; i < constraint; i++){
+    for(let i = 0; i < 1; i++){
 
       let review = {};
       review.rev_Id = index;
       review.rating =  rating[Math.floor(Math.random() * rating.length)];
       review.title = reviewTitle[Math.floor(Math.random() * reviewTitle.length)];
-      review.review = faker.lorem.paragraph();
+      review.review = faker.lorem.words();
       review.recommendation = recommendation[Math.floor(Math.random() * recommendation.length)];
       review.nickname = faker.internet.userName();
       review.email = faker.internet.email();
