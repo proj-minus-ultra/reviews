@@ -75,11 +75,11 @@ let bodyTypes = [
 module.exports = {
   createReviews(index){
     let mockProduct = {}
-    let constraint = Math.floor(Math.random() * 7) + 1;
+    let constraint = Math.floor(Math.random() * 3) + 1;
 
     mockProduct.reviews = [];
 
-    for(let i = 0; i < constraint; i++){
+    for(let i = 0; i < 1; i++){
 
       let review = {};
       review.rev_Id = index;
