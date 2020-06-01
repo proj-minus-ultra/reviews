@@ -15,7 +15,10 @@
     "schema": "psql -d sdc -U root -f schema.sql",
     "psql-seed": "psql -d sdc -U AlexB -c '\\COPY reviews(rev_id,rating,title,review,recommendation,nickname,email,age,bodyType,locat,wearTo,likes,dislikes) FROM 'sdc.csv' csv header ;'",
     "stress-get": "artillery run stress-test/get.yml",
-    "stress-post": "artillery run stress-test/post.yml"
+    "stress-post": "artillery run stress-test/post.yml",
+    "aws": "aws s3 sync client/dist s3://sdc-alex --acl public-read",
+    "s3": "npm run build-prod && npm run aws"
+
   },
   "repository": {
     "type": "git",
