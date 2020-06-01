@@ -49,7 +49,7 @@ export default class App extends Component {
   getFilteredData(id) {
     let { reviewSearch } = this.state;
     axios
-      .get(`http://localhost:9000/reviews/searchQuery/${id}`, { params: { query: reviewSearch }, headers:{'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'} }, )
+      .get(`reviews/searchQuery/${id}`, { params: { query: reviewSearch }, headers:{'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'} }, )
       .then((data) => {
         this.setState({
             filteredReviewData: data.data
@@ -61,7 +61,8 @@ export default class App extends Component {
     //generates a random number between the first product review id (0) and the last 9999999
     //which makes sense since there are 10 million total products
     let rev_Id = Math.floor(Math.random() * 9999999);
-    axios.get(`http://localhost:9000/reviews/${this.state.rev_Id}`)
+
+    axios.get(`reviews/${this.state.rev_Id}`)
     .then((data) => {
 
       this.setState({
