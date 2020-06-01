@@ -7,6 +7,7 @@
     "test": "jest",
     "start": "nodemon",
     "build": "webpack --w --mode development",
+    "build-prod": "webpack --mode production",
     "csv": "node database/csv.js ",
     "count": "node database/mongo/counter.js",
     "drop": "node database/mongo/drop.js && npm run count",
@@ -14,13 +15,16 @@
     "schema": "psql -d sdc -U root -f schema.sql",
     "psql-seed": "psql -d sdc -U AlexB -c '\\COPY reviews(rev_id,rating,title,review,recommendation,nickname,email,age,bodyType,locat,wearTo,likes,dislikes) FROM 'sdc.csv' csv header ;'",
     "stress-get": "artillery run stress-test/get.yml",
-    "stress-post": "artillery run stress-test/post.yml"
+    "stress-post": "artillery run stress-test/post.yml",
+    "aws": "aws s3 sync client/dist s3://sdc-alex --acl public-read",
+    "s3": "npm run build-prod && npm run aws"
+
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/JJACD/reviews_component.git"
   },
-  "author": "Danny San, Alex Benko",
+  "author": "Alex Benko, Danny San",
   "license": "MIT",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.28",
