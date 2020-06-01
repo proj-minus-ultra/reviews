@@ -7,6 +7,7 @@
     "test": "jest",
     "start": "nodemon",
     "build": "webpack --w --mode development",
+    "build-prod": "webpack --mode production",
     "csv": "node database/csv.js ",
     "count": "node database/mongo/counter.js",
     "drop": "node database/mongo/drop.js && npm run count",
@@ -20,7 +21,7 @@
     "type": "git",
     "url": "git+https://github.com/JJACD/reviews_component.git"
   },
-  "author": "Danny San, Alex Benko",
+  "author": "Alex Benko, Danny San",
   "license": "MIT",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.28",
