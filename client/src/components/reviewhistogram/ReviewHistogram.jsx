@@ -19,8 +19,6 @@ export default class ReviewHistogram extends Component {
       countRatings.push(review.rating)
     })
 
-    console.log('Count Ratings:',countRatings)
-
     let count = {
       ratingFive: 0,
       ratingFour: 0,
@@ -33,24 +31,23 @@ export default class ReviewHistogram extends Component {
     } else {
 
       countRatings.map((rate) => {
-        for (let i = 0; i < rate.length; i++) {
-          if (rate[i].rating === 5) {
-            count['ratingFive']++;
-          }
-          if (rate[i].rating === 4) {
-            count['ratingFour']++;
-          }
-          if (rate[i].rating === 3) {
-            count['ratingThree']++;
-          }
-          if (rate[i].rating === 2) {
-            count['ratingTwo']++;
-          }
-          if (rate[i].rating === 1) {
-            count['ratingOne']++;
-          }
+        if (rate === 5) {
+          count['ratingFive']++;
+        }
+        if (rate === 4) {
+          count['ratingFour']++;
+        }
+        if (rate === 3) {
+          count['ratingThree']++;
+        }
+        if (rate === 2) {
+          count['ratingTwo']++;
+        }
+        if (rate === 1) {
+          count['ratingOne']++;
         }
       });
+
       return count;
     }
   }
@@ -106,6 +103,7 @@ export default class ReviewHistogram extends Component {
         ratingCount.ratingTwo +
         ratingCount.ratingOne) * 20
 
+
     let averageCount =
         ratings === [] ? 0:
           (ratingCount.ratingFive * 5 +
@@ -118,6 +116,8 @@ export default class ReviewHistogram extends Component {
             ratingCount.ratingThree +
             ratingCount.ratingTwo +
             ratingCount.ratingOne);
+
+
     return (
       <div className="review-histogram-container">
         <div className="histogram-bar-container">
@@ -263,7 +263,7 @@ export default class ReviewHistogram extends Component {
             </div>
             <div className="review-average-count-num-container">
               <span className="review-average-count-num">
-                {averageCount.toFixed(1).toString()}
+                {averageCount.toFixed(1)}
               </span>
             </div>
           </div>

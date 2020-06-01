@@ -3,6 +3,9 @@
 My Trello Board For this Application:
   https://trello.com/b/YyDNqINY/review-sdc
 
+My Journal For this:
+  https://docs.google.com/document/d/1Kd_1wOL9ta_JExj_6RepGAGFlwKFvAzxEGeZm9H_24E/edit?usp=sharing
+
 1. npm install
 
 2. npm run schema
