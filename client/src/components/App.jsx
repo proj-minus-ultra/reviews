@@ -1,16 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import '../../dist/styles/reviews.modal.search.css';
-import '../../dist/styles/reviews.modal.css';
-import '../../dist/styles/reviews-modal-content.css';
-import '../../dist/styles/reviews-modal-single-review.css';
-import '../../dist/styles/reviews-write-review.css';
-import '../../dist/styles/reviews-main.css';
-import '../../dist/styles/reviews-filter-review.css'
-import '../../dist/styles/reviews-histogram.css'
-import '../../dist/styles/reviews-display.css'
-import '../../dist/styles/reviews-home-review.css'
-import '../../dist/styles/reviews-write-review-modal.css'
+
 import MainSearchBar from './searchbar/MainSearchBar.jsx';
 import MainSearchButton from './searchbutton/MainSearchButton.jsx';
 import SearchModal from '../components/searchmodal/SearchModal.jsx';
