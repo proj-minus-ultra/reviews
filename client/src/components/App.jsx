@@ -115,11 +115,11 @@ export default class App extends Component {
 
   ratingFilterHandler(num) {
     let reviewFilteredData = []
-    let { ratingsData } = this.state
-    for(let i = 0; i < ratingsData.length; i++){
-      for(let j = 0; j < ratingsData[i].length; j++){
-        if(ratingsData[i][j].rating === num){
-          reviewFilteredData.push(ratingsData[i][j])
+    let { reviewData } = this.state
+    for(let i = 0; i < reviewData.length; i++){
+      for(let j = 0; j < reviewData[i].length; j++){
+        if(reviewData[i][j].rating === num){
+          reviewFilteredData.push(reviewData[i][j])
         }
       }
     }
