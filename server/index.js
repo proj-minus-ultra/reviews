@@ -14,7 +14,8 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(cors());
 app.use(morgan('dev'));
 
-app.use(express.static(path.join(__dirname, '../client/dist')));
+//caches html
+app.use(express.static(path.join(__dirname, '../client/dist'),{maxAge:7536000}));
 
 app.use('/', router);
 
