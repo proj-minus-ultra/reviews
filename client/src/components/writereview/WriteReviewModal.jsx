@@ -56,6 +56,7 @@ export default class WriteReviewModal extends Component {
 
   postReview(e, id){
 
+    console.log('Posting...');
     e.preventDefault()
     let obj = {
       rev_Id: this.props.rev_Id,
