@@ -18,7 +18,7 @@
     "stress-post": "artillery run stress-test/post.yml",
     "aws": "aws s3 sync client/dist s3://sdc-alex --acl public-read",
     "s3": "npm run build-prod && npm run aws",
-    "docker-build": "docker build . -t sdc",
+    "docker-build": "npm run build-prod && docker build . -t sdc",
     "docker-run": "docker run -p 80:80 sdc",
     "docker-push": "docker tag sdc alexbenko/sdc && docker push alexbenko/sdc"
   },

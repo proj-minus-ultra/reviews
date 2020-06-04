@@ -13,10 +13,9 @@ stress-test
 schema.sql
 jest.config.js
 client/src
-client/dist/styles.css
 database/mongo
+database/seed.js
 node_modules
-client/dist/main.js
 sdc.csv
 newrelic_agent.log
 webpack.config.js
