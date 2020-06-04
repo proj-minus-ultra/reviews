@@ -1,5 +1,5 @@
-const router = require('express').Router();
-const controller = require('./controller.js');
+import router from 'express'.Router();
+import controller from './controller.js';
 
 //app only needs post and get, but i builts them for practice
 router.route('/reviews/:rev_Id')
@@ -8,4 +8,4 @@ router.route('/reviews/:rev_Id')
   .delete(controller.delete)
   .put(controller.update)
 
-module.exports = router
+  export default router

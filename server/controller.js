@@ -1,4 +1,4 @@
-const database = require('../database/postgres/dbhelpers');
+import database from '../database/postgres/dbhelpers';
 
 const controller = {
   post: (req, res) =>{
@@ -46,4 +46,4 @@ const controller = {
 
 }
 
-module.exports = controller;
+export default controller;

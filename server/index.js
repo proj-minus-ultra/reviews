@@ -1,10 +1,12 @@
-require('newrelic');
-const express = require('express');
-const bodyParser = require('body-parser');
-const morgan = require('morgan');
-const cors = require('cors');
-const path = require('path');
-const router = require('./router.js')
+import express from 'express';
+import bodyParser from 'body-parser';
+import morgan from 'morgan';
+import cors from 'cors';
+import path from 'path';
+import router from './router.js';
+import React from 'react';
+import ReactDOMServer from 'react-dom/server';
+import reactApp from '../client/src/components/App.jsx';
 
 const app = express();
 const port = (80) ;

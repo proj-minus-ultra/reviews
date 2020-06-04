@@ -2,10 +2,10 @@
   "name": "reviews_component",
   "version": "1.0.0",
   "description": "replica of lululemon reviews module for educational purposes",
-  "main": "./server/index.js",
+  "main": "start.js",
   "scripts": {
     "test": "jest",
-    "start": "nodemon",
+    "start": "nodemon server/start.js",
     "build": "webpack --w --mode development",
     "build-prod": "webpack --mode production",
     "csv": "node database/csv.js ",
@@ -29,6 +29,7 @@
   "author": "Alex Benko, Danny San",
   "license": "MIT",
   "dependencies": {
+    "@babel/register": "^7.10.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.28",
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@fortawesome/react-fontawesome": "^0.1.9",
