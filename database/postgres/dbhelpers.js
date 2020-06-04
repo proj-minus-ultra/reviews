@@ -1,6 +1,6 @@
-import db from ('./index.js');
+import db from './index.js';
 
-export default = {
+const dbHelpers = {
 
   getSomeReviews(req,cb){
     //rating username title review locat likes dislikes recom
@@ -53,3 +53,5 @@ export default = {
   }
 
 }
+
+export default dbHelpers;
