@@ -12,14 +12,12 @@ stress-test
 .eslintignore
 schema.sql
 jest.config.js
-client/src
+
 database/mongo
 database/seed.js
 node_modules
 sdc.csv
 newrelic_agent.log
-webpack.config.js
-.babelrc
 database/createReviews.js
 database/csv.js
 

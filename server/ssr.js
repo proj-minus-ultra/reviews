@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import ReactApp from '../client/src/components/App';
+import ReactApp from '../client/src/components/App.jsx';
 import fs from 'fs';
 import path from 'path';
 
@@ -8,7 +8,7 @@ import path from 'path';
 const ssr = (app)=>{
   app.get('^/$', (req,res)=>{
     console.log('Rendering...');
-    const App = ReactDOMServer.renderToString(<ReactApp />);
+    const App = ReactDOMServer.renderToString(React.createElement(ReactApp));
 
     fs.readFile(path.join(__dirname,'../client/dist/index.html'), 'utf8', (err,data)=>{
       if(err){

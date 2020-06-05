@@ -8,4 +8,4 @@ config:
 scenarios:
   - flow:
     - get:
-        url: "/reviews/523432"
+        url: "/api/reviews/523432"
