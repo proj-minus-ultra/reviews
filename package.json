@@ -2,10 +2,10 @@
   "name": "reviews_component",
   "version": "1.0.0",
   "description": "replica of lululemon reviews module for educational purposes",
-  "main": "./server/index.js",
+  "main": "start.js",
   "scripts": {
     "test": "jest",
-    "start": "nodemon",
+    "start": "nodemon server/start.js",
     "build": "webpack --w --mode development",
     "build-prod": "webpack --mode production",
     "csv": "node database/csv.js ",
@@ -18,17 +18,17 @@
     "stress-post": "artillery run stress-test/post.yml",
     "aws": "aws s3 sync client/dist s3://sdc-alex --acl public-read",
     "s3": "npm run build-prod && npm run aws",
-    "docker-build": "docker build . -t sdc",
+    "docker-build": "npm run build-prod && docker build . -t sdc",
     "docker-run": "docker run -p 80:80 sdc",
     "docker-push": "docker tag sdc alexbenko/sdc && docker push alexbenko/sdc"
   },
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/JJACD/reviews_component.git"
+    "type": "git"
   },
   "author": "Alex Benko, Danny San",
   "license": "MIT",
   "dependencies": {
+    "@babel/register": "^7.10.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.28",
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@fortawesome/react-fontawesome": "^0.1.9",
@@ -43,6 +43,7 @@
     "morgan": "1.10.0",
     "newrelic": "^6.8.0",
     "nodemon": "2.0.2",
+    "path": "^0.12.7",
     "pg": "^8.2.1",
     "react": "16.13.1",
     "react-dom": "16.13.1"
@@ -51,10 +52,11 @@
     "@babel/core": "7.9.0",
     "@babel/plugin-transform-runtime": "^7.9.6",
     "@babel/preset-env": "7.9.0",
+    "@babel/preset-es2015": "^7.0.0-beta.53",
     "@babel/preset-react": "7.9.4",
-    "@shelf/jest-mongodb": "^1.1.5",
     "babel-jest": "^26.0.1",
     "babel-loader": "8.1.0",
+    "babel-register": "^6.26.0",
     "css-loader": "^3.4.2",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
@@ -64,7 +66,6 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^2.5.1",
-    "html-webpack-plugin": "^4.0.3",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^26.0.1",
     "react-test-renderer": "^16.13.1",
@@ -79,9 +80,5 @@
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
       "\\.(css|less)$": "identity-obj-proxy"
     }
-  },
-  "bugs": {
-    "url": "https://github.com/JJACD/reviews_component/issues"
-  },
-  "homepage": "https://github.com/JJACD/reviews_component#readme"
+  }
 }

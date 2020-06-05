@@ -1,5 +1,5 @@
-const { Pool } = require('pg');
-const ubuntu = require('./config.js');
+import { Pool } from 'pg';
+import ubuntu from './config.js';
 
 //change host to 'localhost', remove port, and possibly password for just local use
 //if you cloned this, you need to change the password to whatever your password is

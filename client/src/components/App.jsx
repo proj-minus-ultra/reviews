@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
 import MainSearchBar from './searchbar/MainSearchBar.jsx';
 import MainSearchButton from './searchbutton/MainSearchButton.jsx';
 import SearchModal from '../components/searchmodal/SearchModal.jsx';
@@ -11,7 +10,7 @@ import ReviewDisplay from './reviewdisplay/ReviewDisplay.jsx'
 import WriteReviewModal from './writereview/WriteReviewModal.jsx'
 
 
-export default class App extends Component {
+ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -31,7 +30,6 @@ export default class App extends Component {
     this.getReviews = this.getReviews.bind(this);
     this.modalHandler = this.modalHandler.bind(this);
     this.searchQueryChanger = this.searchQueryChanger.bind(this);
-    this.getFilteredData = this.getFilteredData.bind(this);
     this.onSearchClick = this.onSearchClick.bind(this);
     this.singleReviewClickHandler = this.singleReviewClickHandler.bind(this);
     this.ratingFilterHandler = this.ratingFilterHandler.bind(this)
@@ -44,17 +42,7 @@ export default class App extends Component {
 
   componentDidMount() {
    this.getReviews();
-  }
 
-  getFilteredData(id) {
-    let { reviewSearch } = this.state;
-    axios
-      .get(`reviews/searchQuery/${id}`, { params: { query: reviewSearch }, headers:{'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'} }, )
-      .then((data) => {
-        this.setState({
-            filteredReviewData: data.data
-          });
-      });
   }
 
   getReviews(){
@@ -187,3 +175,5 @@ export default class App extends Component {
     );
   }
 }
+
+export default App;

@@ -1,5 +1,5 @@
 # Use the official image as a parent image.
-FROM node:alpine
+FROM node
 
 # Set the working directory.
 WORKDIR /client/dist

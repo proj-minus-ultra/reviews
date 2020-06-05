@@ -1,6 +1,6 @@
-const db = require('./index.js');
+import db from './index.js';
 
-module.exports = {
+const dbHelpers = {
 
   getSomeReviews(req,cb){
     //rating username title review locat likes dislikes recom
@@ -53,3 +53,5 @@ module.exports = {
   }
 
 }
+
+export default dbHelpers;
