@@ -12,7 +12,6 @@ stress-test
 .eslintignore
 schema.sql
 jest.config.js
-
 database/mongo
 database/seed.js
 node_modules
