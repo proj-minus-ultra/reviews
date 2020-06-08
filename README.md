@@ -15,11 +15,11 @@ Link For Deployed Version
 
 
 Final Google Speed Test:
-  ![alt text](https://sdc-alex.s3-us-west-2.amazonaws.com/Screen+Shot+2020-06-05+at+2.38.36+PM.png)
+  ![alt text](Final Google Speed Insight.png)
 
 
 Final Stress Test:
   Low: 8100 RPS
   High: 9400 RPS
   Average Latency 137 ms
-  ![alt text](https://sdc-alex.s3-us-west-2.amazonaws.com/Screen+Shot+2020-06-05+at+3.23.46+PM.png)
+  ![alt text](Stress Test.png)
