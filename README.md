@@ -10,7 +10,7 @@ Link For Deployed Version
   http://ec2-52-43-246-36.us-west-2.compute.amazonaws.com/
 
   Total Servers:
-    1 Nginx
+    1 Nginx Load Balancer
     3 proxies
 
 
