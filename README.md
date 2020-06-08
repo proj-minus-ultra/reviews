@@ -17,8 +17,11 @@ HEAD
 Final Google Speed Test: <br />
   ![alt text](./finalGoogleSpeedInsight.png)
 
+ <br />
+  <br />
+   <br />
 
-<<<<<<< HEAD
+
 Final Stress Test: <br />
   Low: 8100 RPS <br />
   High: 9400 RPS <br />
