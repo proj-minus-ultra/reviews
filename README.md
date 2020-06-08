@@ -15,11 +15,11 @@ Link For Deployed Version
 
 
 Final Google Speed Test:
-  ![alt text](Final Google Speed Insight.png)
+  ![alt text](/Final Google Speed Insight.png)
 
 
 Final Stress Test:
   Low: 8100 RPS
   High: 9400 RPS
   Average Latency 137 ms
-  ![alt text](Stress Test.png)
+  ![alt text](/Stress Test.png)
