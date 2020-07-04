@@ -15,6 +15,7 @@
 
 
 <h2> Final Google Speed Test:</h2> <br />
+
   ![alt text](./finalGoogleSpeedInsight.jpeg)
 
 <br />
@@ -26,4 +27,5 @@
   Low: 8100 RPS <br />
   High: 9400 RPS <br />
   Average Latency 137 ms <br />
+  
   ![Final Stress Test](./stressTest.png)
